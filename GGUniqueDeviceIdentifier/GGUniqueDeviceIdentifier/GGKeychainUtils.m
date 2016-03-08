@@ -21,7 +21,7 @@ static NSString *GGKeychainUtilsErrorDomain = @"GGKeychainUtilsErrorDomain";
 	 */
 	return [NSMutableDictionary dictionaryWithObjectsAndKeys:
 		   (__bridge id)(kSecClassGenericPassword), kSecClass,
-		   @"afdafe", kSecAttrService,
+		   [NSBundle mainBundle].bundleIdentifier, kSecAttrService,
             account, kSecAttrAccount,
 		   kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly, kSecAttrAccessible, nil];
 }
