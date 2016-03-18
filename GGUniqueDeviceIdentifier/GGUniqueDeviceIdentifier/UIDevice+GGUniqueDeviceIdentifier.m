@@ -48,7 +48,7 @@
 	uuidString = (NSString *)CFBridgingRelease(CFUUIDCreateString(NULL, uuid));
 	CFRelease(uuid);
 
-	return uuidString;
+	return [uuidString lowercaseString];
 }
 
 @end
