@@ -8,24 +8,12 @@
 
 #import "UIDevice+GGUniqueDeviceIdentifier.h"
 #import "GGKeychainUtils.h"
-#include <objc/runtime.h>
-
-@interface UIDevice ()
-@property (strong, nonatomic) NSString *uniqueDeviceIdentifier;
-@end
 
 @implementation UIDevice (GGUniqueDeviceIdentifier)
 
-- (NSString *)uniqueDeviceIdentifier {
-	return objc_getAssociatedObject(self, @selector(uniqueDeviceIdentifier));
-}
-
-- (void)setUniqueDeviceIdentifier:(NSString *)uniqueDeviceIdentifier {
-	objc_setAssociatedObject(self, @selector(uniqueDeviceIdentifier), uniqueDeviceIdentifier, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
+static NSString *_uniqueDeviceIdentifier = nil;
 + (NSString *)uniqueDeviceIdentifier {
-	if (![UIDevice currentDevice].uniqueDeviceIdentifier) {
+	if (!_uniqueDeviceIdentifier) {
 		NSString *account = @"uniqueDeviceIdentifier";
 		NSString *item = [GGKeychainUtils getItemWithAccount:account error:nil];
         //如果获取不到值，则生成一个uuid存入keychain中
@@ -34,10 +22,10 @@
 			NSAssert(item, @"uuid is nil.");
 			[GGKeychainUtils storeItem:item withAccount:account updateExisting:YES error:nil];
 		}
-		[UIDevice currentDevice].uniqueDeviceIdentifier = item;
+		_uniqueDeviceIdentifier = item;
 	}
 
-	return [UIDevice currentDevice].uniqueDeviceIdentifier;
+	return _uniqueDeviceIdentifier;
 }
 
 + (NSString *)getUUID {
