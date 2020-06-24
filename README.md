@@ -16,5 +16,5 @@ iOS设备ID，在单台设备上唯一
 	* uniqueDeviceIdentifier = 09ddef07-bba8-4995-9271-5642a5c35530
 * 抹掉设备后，从**《第一台设备》**的备份中恢复
 	* uniqueDeviceIdentifier = 960784dd-2b20-468b-af95-c41f71ad0f40
-* 抹掉设备后，使用跟**《第一台设备》**相同的iCloud账号登录，并设置为同步keychain
+* 抹掉设备后，使用跟**《第一台设备》**相同的iCloud账号登录，并设置为同步KeyChain
 	* uniqueDeviceIdentifier = fa5ba418-f3c6-4e70-a35a-796424ec1c21
